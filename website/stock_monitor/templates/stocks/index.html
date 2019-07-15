@@ -1,3 +1,8 @@
+<style type="text/css">
+	table, tr, td {
+	    border: 1px solid black;
+	}
+</style>
 {% if result %}
 	<table>
 		<tr>
@@ -11,11 +16,19 @@
 			<tr>
 				<td>{{stock.stock_name}} - {{stock.stock_code}}</td> 
 				<td>{{stock.stock_open_price}}</td>
-				<td>{{stock.stock_latest_price}}</td>
-				<td>{{stock.percentage}}%</td>
+				{% if stock.stock_latest_price >= stock.stock_open_price %}
+					<td style="background-color: coral;">{{stock.stock_latest_price}}</td>
+					<td style="background-color: coral;">{{stock.percentage}}%</td>
+				{% else %}
+					<td style="background-color: lightgreen;">{{stock.stock_latest_price}}</td>
+					<td style="background-color: lightgreen;">{{stock.percentage}}%</td>
+				{% endif %}
 				<td>{{stock.stock_price}}</td>
 			</tr>
 		{% endfor %}
+		<tr>
+			<td colspan="5" style="text-align: right;">Data time: {% now "SHORT_DATETIME_FORMAT" %}</td>
+		</tr>
 	</table>
 {% else %}
 	<p>No stocks are under monitored now.</p>
