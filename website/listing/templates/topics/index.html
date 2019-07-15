@@ -1,0 +1,9 @@
+{% if latest_topics %}
+	<ul>
+		{% for topic in latest_topics %}
+			<li><a href="{{topic.id}}">{{topic.topic_title}}</a></li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No topics are available now.</p>
+{% endif %}
